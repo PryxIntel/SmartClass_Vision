@@ -1,0 +1,78 @@
+import os
+import pickle
+import numpy as np
+from pathlib import Path
+from utils.config import KNOWN_FACES_DIR, BASE_DIR, DEEPFACE_DIR
+
+# Force DeepFace to install models locally
+os.environ["DEEPFACE_HOME"] = str(DEEPFACE_DIR)
+from deepface import DeepFace
+
+EMBEDDINGS_FILE = BASE_DIR / "data" / "embeddings.pkl"
+
+
+class FaceRecognizer:
+    def __init__(self):
+        self.model_name = "Facenet"
+        self.known_embeddings = {}
+        self.threshold = 0.40
+
+        if EMBEDDINGS_FILE.exists():
+            with open(EMBEDDINGS_FILE, "rb") as f:
+                self.known_embeddings = pickle.load(f)
+
+    def train_system(self):
+        print("\n[INFO] Training Recognizer Engine. This may take a moment depending on your CPU...")
+        embeddings_dict = {}
+
+        for student_folder in os.listdir(KNOWN_FACES_DIR):
+            folder_path = Path(KNOWN_FACES_DIR) / student_folder
+            if not folder_path.is_dir(): continue
+
+            roll_number = student_folder
+            embeddings_dict[roll_number] = []
+
+            for img_file in os.listdir(folder_path):
+                img_path = str(folder_path / img_file)
+                try:
+                    res = DeepFace.represent(img_path, model_name=self.model_name, enforce_detection=False)
+                    if len(res) > 0:
+                        embeddings_dict[roll_number].append(res[0]["embedding"])
+                except Exception as e:
+                    print(f"[WARNING] Could not process {img_path}: {e}")
+
+        with open(EMBEDDINGS_FILE, "wb") as f:
+            pickle.dump(embeddings_dict, f)
+
+        self.known_embeddings = embeddings_dict
+        print(f"[SUCCESS] Training complete! Loaded {len(self.known_embeddings)} students into memory.")
+
+    def recognize(self, face_crop):
+        if not self.known_embeddings:
+            return "Unknown", 0.0
+        try:
+            res = DeepFace.represent(face_crop, model_name=self.model_name, enforce_detection=False)
+            if len(res) == 0: return "Unknown", 0.0
+
+            live_embedding = np.array(res[0]["embedding"])
+            best_match = "Unknown"
+            best_distance = float("inf")
+
+            for roll_number, saved_embeddings in self.known_embeddings.items():
+                for saved_emb in saved_embeddings:
+                    saved_emb = np.array(saved_emb)
+                    distance = np.dot(live_embedding, saved_emb) / (
+                                np.linalg.norm(live_embedding) * np.linalg.norm(saved_emb))
+                    cosine_distance = 1 - distance
+
+                    if cosine_distance < best_distance:
+                        best_distance = cosine_distance
+                        best_match = roll_number
+
+            if best_distance < self.threshold:
+                confidence = round((1 - (best_distance / self.threshold)) * 100, 2)
+                return best_match, confidence
+            else:
+                return "Unknown", 0.0
+        except Exception as e:
+            return "Unknown", 0.0
