@@ -4,7 +4,6 @@ import numpy as np
 from pathlib import Path
 from utils.config import KNOWN_FACES_DIR, BASE_DIR, DEEPFACE_DIR
 
-# Force DeepFace to install models locally
 os.environ["DEEPFACE_HOME"] = str(DEEPFACE_DIR)
 from deepface import DeepFace
 
@@ -13,16 +12,16 @@ EMBEDDINGS_FILE = BASE_DIR / "data" / "embeddings.pkl"
 
 class FaceRecognizer:
     def __init__(self):
-        self.model_name = "Facenet"
+        self.model_name = "Facenet512"
         self.known_embeddings = {}
-        self.threshold = 0.40
+        self.threshold = 0.25
 
         if EMBEDDINGS_FILE.exists():
             with open(EMBEDDINGS_FILE, "rb") as f:
                 self.known_embeddings = pickle.load(f)
 
     def train_system(self):
-        print("\n[INFO] Training Recognizer Engine. This may take a moment depending on your CPU...")
+        print(f"\n[INFO] Training High-Definition {self.model_name} Engine...")
         embeddings_dict = {}
 
         for student_folder in os.listdir(KNOWN_FACES_DIR):
@@ -45,12 +44,15 @@ class FaceRecognizer:
             pickle.dump(embeddings_dict, f)
 
         self.known_embeddings = embeddings_dict
-        print(f"[SUCCESS] Training complete! Loaded {len(self.known_embeddings)} students into memory.")
+        print(f"[SUCCESS] Training complete! Loaded {len(self.known_embeddings)} students into HD memory.")
 
     def recognize(self, face_crop):
         if not self.known_embeddings:
             return "Unknown", 0.0
         try:
+            if face_crop.shape[0] < 20 or face_crop.shape[1] < 20:
+                return "Unknown", 0.0
+
             res = DeepFace.represent(face_crop, model_name=self.model_name, enforce_detection=False)
             if len(res) == 0: return "Unknown", 0.0
 
@@ -74,5 +76,6 @@ class FaceRecognizer:
                 return best_match, confidence
             else:
                 return "Unknown", 0.0
+
         except Exception as e:
             return "Unknown", 0.0

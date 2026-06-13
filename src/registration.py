@@ -8,7 +8,6 @@ from utils.config import KNOWN_FACES_DIR, CAMERA_ID
 
 
 def search_student_record(roll_number):
-    """Searches the DB and returns the record and image count for the GUI."""
     record = get_student_info(roll_number)
     if record:
         student_dir = Path(KNOWN_FACES_DIR) / roll_number
@@ -18,7 +17,6 @@ def search_student_record(roll_number):
 
 
 def delete_existing_student(roll_number):
-    """Deletes a student and returns status to the GUI."""
     if not student_exists(roll_number):
         return False, f"Roll Number {roll_number} not found in database."
 
@@ -29,17 +27,13 @@ def delete_existing_student(roll_number):
     return True, f"All records and images for {roll_number} deleted successfully."
 
 
-def register_student(roll_number, name, degree, branch, section):
-    """Handles the camera capture after receiving verified data from the GUI."""
-
-    # 1. Double check database
+def register_student(roll_number, name, gender, degree, year, branch, section):
     if student_exists(roll_number):
         return False, f"Roll Number {roll_number} is already registered!"
 
-    if not add_student(roll_number, name, degree, branch, section):
+    if not add_student(roll_number, name, gender, degree, year, branch, section):
         return False, "Database insertion failed."
 
-    # 2. Setup folders and camera
     student_dir = Path(KNOWN_FACES_DIR) / roll_number
     student_dir.mkdir(parents=True, exist_ok=True)
 

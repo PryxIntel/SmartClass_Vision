@@ -5,11 +5,9 @@ from utils.config import YOLO_WEIGHTS, CONFIDENCE_THRESHOLD
 
 class FaceDetector:
     def __init__(self):
-        """Initializes the YOLOv8 face detection model from the local file."""
         self.model = YOLO(YOLO_WEIGHTS)
 
     def detect_faces(self, frame):
-        """Passes a video frame to YOLO to find faces."""
         results = self.model(frame, conf=CONFIDENCE_THRESHOLD, verbose=False)
         cropped_faces = []
 
@@ -29,7 +27,6 @@ class FaceDetector:
                         "coords": (x1, y1, x2, y2),
                         "image": face_crop
                     })
-
                 cv2.rectangle(frame, (x1, y1), (x2, y2), (0, 255, 0), 2)
 
         return frame, cropped_faces
