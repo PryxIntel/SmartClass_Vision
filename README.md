@@ -1,28 +1,40 @@
-🎓 SmartClass Vision
-
-AI-Powered Face Recognition Attendance Management System
+<div align="center">
 
 
 
+\# 🎓 SmartClass Vision
 
 
 
+\### AI-Powered Face Recognition Attendance Management System
 
 
 
+!\[Python](https://img.shields.io/badge/Python-3.x-blue?style=for-the-badge\\\&logo=python)
+
+!\[OpenCV](https://img.shields.io/badge/OpenCV-Computer%20Vision-green?style=for-the-badge)
+
+!\[YOLOv8](https://img.shields.io/badge/YOLOv8-Face%20Detection-orange?style=for-the-badge)
+
+!\[DeepFace](https://img.shields.io/badge/DeepFace-Face%20Recognition-red?style=for-the-badge)
+
+!\[SQLite](https://img.shields.io/badge/SQLite-Database-blue?style=for-the-badge)
 
 
 
+Automated attendance management using \*\*YOLOv8 Face Detection\*\*, \*\*DeepFace Recognition\*\*, and \*\*SQLite Database Integration\*\*.
 
 
 
-
-
-Automated attendance management using YOLOv8 Face Detection, DeepFace Recognition, and SQLite Database Integration.
+</div>
 
 
 
-📖 Overview
+\---
+
+
+
+\## 📖 Overview
 
 
 
@@ -30,63 +42,107 @@ SmartClass Vision is an AI-powered attendance management system designed to auto
 
 
 
-The platform combines YOLOv8 face detection and DeepFace facial recognition to provide accurate, real-time attendance monitoring while eliminating manual attendance processes.
+The platform combines \*\*YOLOv8 face detection\*\* and \*\*DeepFace facial recognition\*\* to provide accurate, real-time attendance monitoring while eliminating manual attendance processes.
 
 
 
-✨ Key Features
+\---
 
-🎯 Face Detection
 
-Real-time face detection using YOLOv8
 
-Fast and accurate facial localization
+\## ✨ Key Features
 
-🧠 Face Recognition
 
-DeepFace-powered recognition engine
 
-FaceNet512 embedding matching
+\### 🎯 Face Detection
 
-Multi-shot verification support
 
-📝 Attendance Management
 
-Automatic attendance marking
+\* Real-time face detection using YOLOv8
 
-Attendance history storage
+\* Fast and accurate facial localization
 
-Attendance report generation
 
-👨‍🎓 Student Registration
 
-Student profile management
+\### 🧠 Face Recognition
 
-Facial data enrollment
 
-Database-backed records
 
-💾 Database Integration
+\* DeepFace-powered recognition engine
 
-SQLite-based storage
+\* FaceNet512 embedding matching
 
-Persistent attendance records
+\* Multi-shot verification support
 
-🛠 Technology Stack
 
-Category	Technologies
 
-Language	Python
+\### 📝 Attendance Management
 
-Computer Vision	YOLOv8, OpenCV
 
-Face Recognition	DeepFace, FaceNet512
 
-Database	SQLite
+\* Automatic attendance marking
 
-GUI	CustomTkinter
+\* Attendance history storage
 
-📂 Project Structure
+\* Attendance report generation
+
+
+
+\### 👨‍🎓 Student Registration
+
+
+
+\* Student profile management
+
+\* Facial data enrollment
+
+\* Database-backed records
+
+
+
+\### 💾 Database Integration
+
+
+
+\* SQLite-based storage
+
+\* Persistent attendance records
+
+
+
+\---
+
+
+
+\## 🛠 Technology Stack
+
+
+
+| Category         | Technologies         |
+
+| ---------------- | -------------------- |
+
+| Language         | Python               |
+
+| Computer Vision  | YOLOv8, OpenCV       |
+
+| Face Recognition | DeepFace, FaceNet512 |
+
+| Database         | SQLite               |
+
+| GUI              | CustomTkinter        |
+
+
+
+\---
+
+
+
+\## 📂 Project Structure
+
+
+
+```text
 
 SmartClass\_Vision/
 
@@ -104,7 +160,19 @@ SmartClass\_Vision/
 
 └── .gitignore
 
-🚀 Getting Started
+```
+
+
+
+\---
+
+
+
+\## 🚀 Getting Started
+
+
+
+```bash
 
 git clone https://github.com/PryxIntel/SmartClass\_Vision.git
 
@@ -114,23 +182,39 @@ pip install -r requirements.txt
 
 python gui.py
 
-🎯 Future Enhancements
-
-Web Dashboard
-
-Cloud Database Support
-
-Student Analytics
-
-Multi-Classroom Management
-
-Mobile Integration
-
-👨‍💻 Author
+```
 
 
 
-Priyanshu Chauhan
+\---
+
+
+
+\## 🎯 Future Enhancements
+
+
+
+\* Web Dashboard
+
+\* Cloud Database Support
+
+\* Student Analytics
+
+\* Multi-Classroom Management
+
+\* Mobile Integration
+
+
+
+\---
+
+
+
+\## 👨‍💻 Author
+
+
+
+\*\*Priyanshu Chauhan\*\*
 
 
 
@@ -141,4 +225,6 @@ MMMUT Gorakhpur
 
 
 GitHub: https://github.com/PryxIntel
+
+
 
