@@ -2,11 +2,11 @@
 
 
 
-\### AI-Powered Face Recognition Attendance Management System
+\## AI-Powered Face Recognition Attendance Management System
 
 
 
-SmartClass Vision is an intelligent attendance management platform that automates student identification and attendance tracking using computer vision and facial recognition technologies. The system leverages YOLOv8-based face detection and DeepFace-powered facial recognition to eliminate manual attendance processes and improve accuracy in educational environments.
+SmartClass Vision is an intelligent attendance management platform that automates student identification and attendance tracking using Computer Vision and Facial Recognition technologies. The system leverages YOLOv8 for face detection and DeepFace (FaceNet512) for facial recognition, eliminating manual attendance processes and improving accuracy in educational environments.
 
 
 
@@ -106,39 +106,39 @@ SmartClass Vision is an intelligent attendance management platform that automate
 
 Camera Feed
 
-&#x20;    │
+&#x20;   │
 
-&#x20;    ▼
+&#x20;   ▼
 
 YOLOv8 Face Detection
 
-&#x20;    │
+&#x20;   │
 
-&#x20;    ▼
+&#x20;   ▼
 
 Face Cropping \& Processing
 
-&#x20;    │
+&#x20;   │
 
-&#x20;    ▼
+&#x20;   ▼
 
 DeepFace Recognition Engine
 
-&#x20;    │
+&#x20;   │
 
-&#x20;    ▼
+&#x20;   ▼
 
 Student Verification
 
-&#x20;    │
+&#x20;   │
 
-&#x20;    ▼
+&#x20;   ▼
 
 Attendance Database (SQLite)
 
-&#x20;    │
+&#x20;   │
 
-&#x20;    ▼
+&#x20;   ▼
 
 Dashboard \& Reports
 
@@ -166,7 +166,7 @@ Registers new students by capturing facial data and storing embeddings for futur
 
 
 
-Detects faces in real-time using YOLOv8 face detection models.
+Detects faces in real time using YOLOv8 face detection models.
 
 
 
